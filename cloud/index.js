@@ -14,19 +14,31 @@ Moralis.Cloud.define(
       const query = new Moralis.Query("UserHandle");
       query.equalTo("handle", userHandle);
       const userHandleObjs = await query.find({ useMasterKey: true });
-      
-    //   logger.info("Query Result: ", userHandleObjs);
-    //   return userHandleObjs;
 
-    //   return userHandleObjs[0].get("connectedUsers");
+      //   logger.info("Query Result: ", userHandleObjs);
+      //   return userHandleObjs;
+
+      //   return userHandleObjs[0].get("connectedUsers");
 
       const connectedUsers = userHandleObjs[0].get("connectedUsers");
       const connectedWalletsArr = [];
 
-      for (let userObj of connectedUsers) {
-        if (!userObj.isDataAvailable()) {
-          await userObj.fetch({ useMasterKey: true });
-        }
+      // iterate through user objects
+      //   for (let userObj of connectedUsers) {
+      //     if (!userObj.isDataAvailable()) {
+      //       await userObj.fetch({ useMasterKey: true });
+      //     }
+
+      //     if (userObj.has("accounts")) {
+      //       connectedWalletsArr.push(userObj.get("accounts")[0]);
+      //     }
+      //   }
+
+      // iterate through user ids
+      for (let userId of connectedUsers) {
+        const userObj = new Moralis.User();
+        userObj.id = userId;
+        await userObj.fetch({ useMasterKey: true });
 
         if (userObj.has("accounts")) {
           connectedWalletsArr.push(userObj.get("accounts")[0]);
