@@ -1,0 +1,15 @@
+{
+  "name": "tap-auth-demo-cloud-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "eval $(grep '^MORALIS_API_KEY' .env) && eval $(grep '^MORALIS_API_SECRET' .env) && eval $(grep '^MORALIS_SUBDOMAIN' .env) && eval $(grep '^CLOUD_PATH' .env) && moralis-admin-cli watch-cloud-folder --moralisApiKey $MORALIS_API_KEY --moralisApiSecret $MORALIS_API_SECRET --moralisSubdomain $MORALIS_SUBDOMAIN --autoSave 1 --moralisCloudfolder $CLOUD_PATH",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moralis-admin-cli": "^2.1.16"
+  }
+}
